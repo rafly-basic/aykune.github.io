@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Ucapan Ulang Tahun Elegan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: #2c2c2c;
+      margin-bottom: 10px;
+      animation: fadeInDown 2s ease;
+    }
+
+    #messageBox {
+      font-size: 1.2rem;
+      margin: 5px 20px;
+      color: #555;
+      min-height: 60px;
+      animation: fadeIn 3s ease;
+    }
+
+    .buttons {
+      margin-top: 25px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      background: white;
+      color: #333;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #333;
+      color: white;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      font-size: 2rem;
+      animation: floatUp 6s linear forwards;
+    }
+
+    /* Popup Message */
+    .popupMsg {
+      position: absolute;
+      background: white;
+      padding: 10px 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      font-size: 1rem;
+      color: #333;
+      animation: fadeInOut 4s ease forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% {opacity:0; transform: scale(0.8);}
+      10% {opacity:1; transform: scale(1);}
+      90% {opacity:1;}
+      100% {opacity:0; transform: scale(0.8);}
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Selamat Ulang Tahun 🎂</h1>
+  <div id="messageBox">Untukmu, <strong>Salsalina Tiara Septihani</strong></div>
+
+  <div class="buttons">
+    <button onclick="releaseBalloon()">🎈</button>
+    <button onclick="showRandomMessage()">💌</button>
+    <button onclick="spawnPopups()">✨</button>
+    <button onclick="toggleMusic()">🎶</button>
+  </div>
+
+  <!-- Lagu Tulus - Ulang Tahun -->
+  <audio id="bgmusic" autoplay loop muted>
+    <source src="https://docs.google.com/uc?export=download&id=1hP7xYbQJkP-JiNfJpou7k93QYVsRz9nG" type="audio/mp3">
+  </audio>
+
+  <script>
+    const messages = [
+      "Semoga semua impianmu terwujud, seperti indahnya senyum manismu ✨",
+      "Aku beruntung mengenalmu, semoga kita selalu bahagia bersama 💕",
+      "Di hari spesialmu ini, semoga cintaku selalu jadi alasan senyummu 🤍",
+      "Selamat ulang tahun, cintaku. Terima kasih sudah hadir dalam hidupku 💖",
+      "Semoga langkahmu selalu diberkahi dan hatimu selalu damai 🌹",
+      "Kamu bukan hanya tambah umur, tapi juga tambah indah di mataku ✨"
+    ];
+
+    let msgIndex = 0;
+    function showRandomMessage() {
+      const box = document.getElementById("messageBox");
+      box.innerHTML = messages[msgIndex];
+      msgIndex = (msgIndex + 1) % messages.length;
+    }
+
+    function releaseBalloon() {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.innerHTML = '🎈';
+      balloon.style.left = Math.random() * window.innerWidth + 'px';
+      document.body.appendChild(balloon);
+      setTimeout(() => balloon.remove(), 6000);
+    }
+
+    const popupMessages = [
+      "Semoga panjang umur 🎂",
+      "Bahagia selalu Aykunee 💖",
+      "Lancar kuliahnya ✨",
+      "Makin cantik dan bersinar 🌹",
+      "Doa terbaik buat aykuu 🤍",
+      "Selamat menikmati usia baru yang ke 20 🎉",
+      "Jangan lupa terus tersenyum 😍",
+      "I love you aykuu 💕"
+    ];
+
+    function spawnPopups() {
+      popupMessages.forEach((msg, i) => {
+        setTimeout(() => {
+          const popup = document.createElement("div");
+          popup.classList.add("popupMsg");
+          popup.innerText = msg;
+          popup.style.left = Math.random() * 70 + "vw";
+          popup.style.top = Math.random() * 70 + "vh";
+          document.body.appendChild(popup);
+          setTimeout(() => popup.remove(), 4000);
+        }, i * 600);
+      });
+    }
+
+    // Musik
+    const bgmusic = document.getElementById("bgmusic");
+    function toggleMusic() {
+      if (bgmusic.muted) {
+        bgmusic.muted = false; // buka suara
+      } else {
+        bgmusic.muted = true;  // mute lagi
+      }
+    }
+
+    // Efek otomatis saat buka
+    window.onload = () => {
+      spawnPopups();
+      releaseBalloon();
+      setInterval(releaseBalloon, 2000);
+    }
+  </script>
+</body>
+</html>
